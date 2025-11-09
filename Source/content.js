@@ -1,4 +1,11 @@
-﻿(async () => {
+﻿
+(async () => {
+  try {
+
+    if (window.location.hostname != "www.mybib.com") {
+    throw new Error("Site Error: Remember to use this one the MyBib site only");
+  };
+
   const spans = document.querySelectorAll("div[style*='padding: 0px 1in'] > span:first-child");
 
   const items = [...spans].map(span => {
@@ -11,9 +18,7 @@
   }).filter(x => x);
 
   if (!items.length) {
-    chrome.runtime.sendMessage("ERROR");
-    alert("No citations found.");
-    return;
+    throw new Error("Refrence Error: No citations found");
   }
 
   const htmlLinks = items.map(i => `<a href="${i.url}">${i.title}</a>`).join("<br>");
@@ -28,4 +33,9 @@
 
   await navigator.clipboard.write(data);
   chrome.runtime.sendMessage("FINISHED");
+}
+catch (err) {
+  chrome.runtime.sendMessage("ERROR")
+  alert(err.message);
+}
 })();

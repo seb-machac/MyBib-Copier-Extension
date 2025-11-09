@@ -3,7 +3,7 @@
   "name": "MyBib Copier",
   "version": "1.0",
   "description": "Copies MyBib citations as titled hyperlinks",
-  "permissions": ["clipboardWrite", "activeTab", "scripting"],
+  "permissions": ["clipboardWrite", "activeTab", "scripting", "tabs"],
   "action": {
     "default_title": "MyBib Link Copier",
     "default_icon": "Icon.png"
